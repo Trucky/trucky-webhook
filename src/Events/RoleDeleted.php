@@ -2,7 +2,6 @@
 
 namespace Trucky\Webhook\Events;
 
-class GarageUpdated extends BaseEvent
+class RoleDeleted extends BaseEvent
 {
-
 }

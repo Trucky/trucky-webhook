@@ -1,4 +1,4 @@
-# Trucky Webhook for Laravel >10.x
+# Trucky Webhook for Laravel >8.x
 
 ## Installation
 
@@ -20,7 +20,7 @@ Every Webhook request has a `type` property denoting what is you receveiving in 
 
 ```json
 {
-    "type": "job.created"
+    "type": "job_created"
     "data": {
         ....
     }
@@ -29,58 +29,69 @@ Every Webhook request has a `type` property denoting what is you receveiving in 
 
 ### Raw Event Types
 
-- application.accepted
-- application.created
-- application.rejected
-- application.retired
-- application.updated
-- garage.created
-- garage.deleted
-- garage.updated
-- job.created
-- job.cancelled
-- job.completed
-- job.deleted
-- member.kicked
-- member.left
-- role.created
-- role.updated
-- vehicle.created
-- vehicle.updated
-- vehicle.deleted
-
+- application_accepted
+- application_created
+- application_rejected
+- application_retired
+- garage_created
+- garage_deleted
+- garage_updgraded
+- job_created
+- job_cancelled
+- job_completed
+- job_deleted
+- job_event_created
+- member_kicked
+- member_left
+- user_joined_company
+- member_role_assigned
+- role_created
+- role_updated
+- role_deleted
+- vehicle_created
+- vehicle_updated
+- vehicle_deleted
+- vehicle_need_maintenance
+- vehicle_maintenance_complete
 
 ## Events
 
-When a Webhook call is received, the Controller relaunch two Events: a `Trucky\Webhook\TruckyGenericEvent` and a specific event typized for each `type`
+When a Webhook call is received, the Controller relaunch two Events: a `Trucky\Webhook\TruckyGenericEvent` and a specific event typized for each `event` type
 
 You can choose if listen to the Generic Event or listen to each specific event you want to handle
 
 Under the namespace `Trucky\Webhook\Events` you will find the specific events relaunched from the Webhook call.
 
-Each Event class contains a `$payload` property containing the Event Body.
+Each Event class contains a `data` property containing the Event Body.
 
-### Available Events
+### Available Events under \Trucky\Webhooks namespace
 
+- TruckyGenericEvent
 - ApplicationAccepted
 - ApplicationCreated
 - ApplicationRejected
 - ApplicationRetired
-- ApplicationUpdated
 - GarageCreated
 - GarageDeleted
-- GarageUpdated
+- GarageUpgraded
 - JobCreated
 - JobCancelled
 - JobCompleted
 - JobDeleted
+- JobEventCreated
 - MemberKicked
 - MemberLeft
+- UserJoinedCompany
+- MemberRoleAssigned
 - RoleCreated
 - RoleUpdated
+- RoleDeleted
 - VehicleCreated
 - VehicleUpdated
 - VehicleDeleted
+- VehicleAssigned
+- VehicleNeedMaintenance
+- VehicleMaintenanceComplete
 
 ## Create your Event Listeners and register them
 
@@ -116,7 +127,7 @@ class JobCreatedEventListener
 }
 ```
 
-and register it in the `EventServiceProvider`
+and register it in the `EventServiceProvider` of your Laravel application
 
 ```php
 protected $listen = [

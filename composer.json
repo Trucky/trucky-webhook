@@ -1,6 +1,7 @@
 {
     "name": "trucky/webhook",
     "description": "Trucky Webhook for Custom Drivers' Hub",
+    "version": "1.0",
     "type": "library",
     "license": [
         "MIT"

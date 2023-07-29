@@ -9,10 +9,10 @@ class BaseEvent
 {
     use Dispatchable, SerializesModels;
 
-    public array $payload;
+    public array $data;
 
-    public function __construct(array $payload)
+    public function __construct(array $data)
     {
-        $this->payload = $payload;
+        $this->data = $data;
     }
 }
